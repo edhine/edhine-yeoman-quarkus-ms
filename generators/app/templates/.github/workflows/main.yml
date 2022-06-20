@@ -1,0 +1,103 @@
+on: [push]
+
+env:
+  path_application_properties: './src/main/resources/application.properties'
+
+jobs:
+
+  add_properties:
+    runs-on: ubuntu-latest
+    name: Add properties
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add properties to application.properties
+        run: |
+          cat <<EOF >> ${{ env.path_application_properties }}
+          # GITHUB ACTIONS
+          # Native
+          quarkus.native.container-build=true
+          # Container Image
+          quarkus.container-image.registry=${{ secrets.GOOGLE_REGISTRY }}
+          quarkus.container-image.group=${{ secrets.GOOGLE_PROJECT_ID }}/${{ secrets.GOOGLE_DOCKER_REPOSITORY }}
+          quarkus.container-image.push=true
+          # Kubernetes
+          quarkus.kubernetes.ingress.expose=true
+          #quarkus.kubernetes.namespace=${{ secrets.STAGE }}
+          EOF
+
+      - run: cat ${{ env.path_application_properties }}
+
+      - uses: actions/cache@v2
+        id: restore_add_properties
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+  native_build_and_push:
+    runs-on: ubuntu-latest
+    name: Build native Quarkus app
+    needs: [add_properties]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v2
+        id: restore_add_properties
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - run: cat ${{ env.path_application_properties }}
+
+      - name: Login Google Cloud Platform
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Configure docker gcp repository
+        run: gcloud auth configure-docker ${{ secrets.GOOGLE_REGISTRY }}
+
+      - name: Build with Maven
+        run: chmod +x mvnw && ./mvnw -X package -Pnative
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: kubernetes_files
+          path: target/kubernetes
+
+  deploy_kubernetes:
+    runs-on: ubuntu-latest
+    name: Deploy Kubernetes Copilot GCP
+    needs: [native_build_and_push]
+
+    steps:
+      # - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: kubernetes_files
+
+      - name: install tree
+        run: sudo apt-get install tree
+
+      - run: tree
+
+      - name: Login Google Cloud Platform
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Connect to cluster
+        run: gcloud container clusters get-credentials ${{ secrets.GOOGLE_CLUSTER_NAME }} --region ${{ secrets.GOOGLE_REGION_MAIN }} --project ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: get nodes
+        run: kubectl get nodes
+
+      - name: Apply kubernetes.yml
+        run: kubectl apply -f kubernetes.yml

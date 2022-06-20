@@ -1,0 +1,84 @@
+- Until now
+✔ Base template @done(20-06-12 20:29)
+  ✔ simple quarkus project @done(20-06-12 20:29)
+
+✔ Project name, artifactId, group id and version @done(20-06-13 11:17)
+✔ Simple Jenkinsfile @done(20-06-13 11:27)
+✔ Checkstyle @done(20-06-13 11:27)
+  ✔ Checkstyle to jenkins @done(20-06-13 11:27)
+✔ Sonar @done(20-06-13 12:10)
+✔ Add log configuration @done(20-06-13 12:55)
+
+✔ Extensions @done(20-06-13 17:53)
+  ✔ Kafka emitter @done(20-06-13 14:22)
+  ✔ Kafka consumer @done(20-06-13 14:22)
+  ✔ Rest server @done(20-06-13 14:48)
+  ✔ Rest client @done(20-06-13 14:48)
+  ✔ Cron @done(20-06-13 15:24)
+  ✔ Redis client @done(20-06-13 17:52)
+✔ Add project description @done(20-06-13 18:10)
+✔ Update README.md @done(20-06-13 18:10)
+✔ Create entities @done(20-06-14 00:34)
+✔ Scheduler @done(20-06-13 20:12)
+✔ README.md @done(20-06-13 20:12)
+✔ Make all hidden files go to generated code @done(20-06-13 20:11)
+
+✔ CRUD @done(20-06-14 15:05)
+  ✔ Create @done(20-06-14 15:05)
+  ✔ Edit @done(20-06-14 15:05)
+  ✔ Retrieve @done(20-06-14 15:05)
+  ✔ Delete @done(20-06-14 15:05)
+✔ Create fixed field Id @done(20-06-14 15:10)
+✔ JPA/Panache without parameters @done(20-06-14 19:45)
+  ✔ Initialization @done(20-06-14 19:45)
+  ✔ Create @done(20-06-14 19:45)
+  ✔ Edit @done(20-06-14 19:45)
+  ✔ Retrieve @done(20-06-14 19:45)
+  ✔ Get @done(20-06-14 19:45)
+  ✔ count @done(20-06-14 19:45)
+  ✔ Delete @done(20-06-14 19:45)
+
+✔ JPA/Panache with parameters @done(20-06-14 21:45)
+  ✔ Get @done(20-06-14 21:45)
+  ✔ count @done(20-06-14 21:45)
+✔ Add support port javax.rs.Response @done(20-06-14 21:58)
+✔ Create entity service @done(20-06-14 22:12)
+✔ Add variable to check if infos will be put on pom.xml/classes/entity @done(20-06-14 23:59)
+✔ Add lifecycle to CRUD @done(20-06-15 01:31)
+✔ Change log level to work only with user path @done(20-06-16 20:09)
+✔ Add support to JSR 303 @done(20-06-17 18:49)
+✔ Adicionar import para datas caso a entidade utilize alguma data @done(20-07-05 21:25)
+✔ Create Tag annotation and update readme.md @done(20-07-12 16:13)
+✔ use a seperated generator only for tests @done(20-07-12 16:16)
+  ✔ Não foi possível criar em um direorio separado @done(20-09-03 21:18)
+
+- Working
+☐ Remove infos about entity sub-generator, lets focus in bootstrap project
+
+- Future
+☐ Add open API support
+☐ Add @valid annotation to entrypoint of create/edit
+☐ Add Metrics
+☐ Add Opentracing
+☐ Add Monitoring
+☐ Protobuf support (how?)
+☐ Tests for everything until now to generated code
+☐ Tests for everything until now to generator
+☐ Refactor generator
+☐ Add validators in input
+☐ Make update lifecycle send presentEntity and olderEntity
+☐ Add custom docker-compose with server and its dependencies (docker run --name postgres-car -e "POSTGRES_PASSWORD=postgres" -p 5433:5432 -v ~/developer/PostgreSQL:/var/lib/postgresql/data -d postgres)
+☐ Change destination path in code to not concat every time (https://yeoman.io/authoring/file-system.html)
+☐ Rest client JAXB
+☐ Security with keycloak
+☐ Flyway
+☐ Select database
+☐ Git Integration
+  ☐ https://stackoverflow.com/questions/55967993/how-to-remove-git-commit-default-template-message
+☐ Add badges to README.md
+☐ Update response code to match with http status codes
+☐ add file formatter after all operations (it must match with current checkstyle)
+
+- Bugs
+☐ Fix sonar in pom.xml
+✔ Its not possible have redis client with panache. So, redis was deactived. We will add it in quarkus 1.7.0 with redis extension @done(20-09-03 22:35)
