@@ -10,5 +10,5 @@ npm install -g edhine-yeoman-quarkus-ms
 Then generate your new project:
 
 ```bash
-yo yeoman-quarkus
+yo edhine-yeoman-quarkus-ms
 ```
