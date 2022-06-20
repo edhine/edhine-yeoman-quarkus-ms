@@ -1,8 +1,8 @@
 {
-  "name": "edhine-yeoman-quarkus",
+  "name": "generator-edhine-yeoman-quarkus-ms",
   "version": "0.0.1",
   "description": "",
-  "homepage": "https://github.com/edhine/edhine-yeoman-quarkus-ms",
+  "homepage": "https://github.com/edhine/generator-edhine-yeoman-quarkus-ms",
   "author": {
     "name": "Sergio Andrés Orellana Roa",
     "email": "sergio.andres.orellana.roa@gmail.com"
@@ -73,5 +73,5 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "https://github.com/edhine/edhine-yeoman-quarkus-ms"
+  "repository": "https://github.com/edhine/generator-edhine-yeoman-quarkus-ms"
 }
