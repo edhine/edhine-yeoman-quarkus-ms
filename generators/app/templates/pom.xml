@@ -68,6 +68,10 @@
       <version>1.18.24</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>commons-logging-jboss-logging</artifactId>
+    </dependency>
 
     <%_ if(props.extensions.length > 0) { _%>
     <dependency>
