@@ -96,8 +96,9 @@ jobs:
       - name: Connect to cluster
         run: gcloud container clusters get-credentials ${{ secrets.GOOGLE_CLUSTER_NAME }} --region ${{ secrets.GOOGLE_REGION_MAIN }} --project ${{ secrets.GOOGLE_PROJECT_ID }}
 
-      - name: get nodes
-        run: kubectl get nodes
+      - name: Delete old deploymennt
+        run: kubectl delete deployment ${{ github.event.repository.name }}
+        continue-on-error: true
 
       - name: Apply kubernetes.yml
         run: kubectl apply -f kubernetes.yml
