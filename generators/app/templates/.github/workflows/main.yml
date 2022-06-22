@@ -15,6 +15,12 @@ jobs:
       - name: Add properties to application.properties
         run: |
           cat <<EOF >> ${{ env.path_application_properties }}
+          # DB
+          <%_ if(props.extensions.includes("mySql")) { _%>
+          quarkus.datasource.username=root
+          quarkus.datasource.password=
+          dev.quarkus.datasource.jdbc.url=jdbc:mysql://<host>:<port>/<database>
+          <%_ } _%>
           # GITHUB ACTIONS
           # Native
           quarkus.native.container-build=true
@@ -25,6 +31,10 @@ jobs:
           # Kubernetes
           quarkus.kubernetes.ingress.expose=true
           #quarkus.kubernetes.namespace=${{ secrets.STAGE }}
+          quarkus.kubernetes.resources.requests.memory=64Mi
+          quarkus.kubernetes.resources.requests.cpu=250m
+          quarkus.kubernetes.resources.limits.memory=512Mi
+          quarkus.kubernetes.resources.limits.cpu=500m
           EOF
 
       - run: cat ${{ env.path_application_properties }}
