@@ -1,10 +1,10 @@
-# edhine-yeoman-quarkus-ms [![NPM version][npm-image]][npm-url] 
+# generator-edhine-yeoman-quarkus-ms 
 
 ## Installation
 
 ```bash
 npm install -g yo
-npm install -g edhine-yeoman-quarkus-ms
+npm install -g generator-edhine-yeoman-quarkus-ms
 ```
 
 Then generate your new project:
