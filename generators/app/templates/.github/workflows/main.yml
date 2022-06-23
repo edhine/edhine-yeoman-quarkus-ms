@@ -31,10 +31,10 @@ jobs:
           # Kubernetes
           quarkus.kubernetes.ingress.expose=true
           #quarkus.kubernetes.namespace=${{ secrets.STAGE }}
-          quarkus.kubernetes.resources.requests.memory=64Mi
+          quarkus.kubernetes.resources.requests.memory=512Mi
           quarkus.kubernetes.resources.requests.cpu=250m
           quarkus.kubernetes.resources.limits.memory=512Mi
-          quarkus.kubernetes.resources.limits.cpu=500m
+          quarkus.kubernetes.resources.limits.cpu=250m
           EOF
 
       - run: cat ${{ env.path_application_properties }}
