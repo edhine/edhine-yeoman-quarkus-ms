@@ -29,8 +29,9 @@ jobs:
           quarkus.container-image.group=${{ secrets.GOOGLE_PROJECT_ID }}/${{ secrets.GOOGLE_DOCKER_REPOSITORY }}
           quarkus.container-image.push=true
           # Kubernetes
-          quarkus.kubernetes.ingress.expose=true
           #quarkus.kubernetes.namespace=${{ secrets.STAGE }}
+          quarkus.kubernetes.add-version-to-label-selectors=false
+          quarkus.kubernetes.ingress.expose=true
           quarkus.kubernetes.resources.requests.memory=512Mi
           quarkus.kubernetes.resources.requests.cpu=250m
           quarkus.kubernetes.resources.limits.memory=512Mi
